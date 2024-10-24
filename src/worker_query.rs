@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
+use crate::fields::fields::Fields;
 use crate::filters::log_filter::LogsFilter;
 use crate::filters::transaction_filter::TransactionsFilter;
-use crate::options::field_options::FieldsOptions;
-use crate::{LogFilter, LogOptions, TransactionFilter, TransactionOptions};
+use crate::{LogFields, LogFilter, TransactionFields, TransactionFilter};
 use serde::Serialize;
 
 /// Represents a query to be sent to the worker node, specifying the block range and filtering criteria.
@@ -21,7 +21,7 @@ pub(crate) struct WorkerQuery {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transactions: Option<Vec<TransactionsFilter>>, // Filters for transactions based on sender, receiver, etc.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub fields: Option<FieldsOptions>, // Specifies which fields (topics, data, etc.) to retrieve.
+    pub fields: Option<Fields>, // Specifies which fields (topics, data, etc.) to retrieve.
 }
 
 impl WorkerQuery {
@@ -44,11 +44,11 @@ impl WorkerQuery {
         to_block: Option<u64>,
         log_filters: &[LogFilter],
         tx_filters: &[TransactionFilter],
-        log_options: &Option<LogOptions>,
-        tx_options: &Option<TransactionOptions>,
+        log_options: &Option<LogFields>,
+        tx_options: &Option<TransactionFields>,
     ) -> Self {
         let fields = if log_options.is_some() || tx_options.is_some() {
-            Some(FieldsOptions {
+            Some(Fields {
                 log: log_options.as_ref().map(|opts| {
                     let mut log_map = HashMap::new();
                     log_map.insert("topics".to_string(), opts.topic0);

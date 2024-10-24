@@ -77,10 +77,10 @@ The core of the library that sets up the streaming process. It allows you to def
 - **LogFilter**: Filters logs by specific addresses and topics.
 - **TransactionFilter**: Filters transactions by from or to addresses.
 
-### Options
+### Fields
 
-- **LogOptions**: Specify which fields (e.g., topics, data) to include in the logs.
-- **TransactionOptions**: Specify which fields (e.g., hash, gas) to include in transactions.
+- **LogFields**: Specify which fields (e.g., topics, data) to include in the logs.
+- **TransactionFields**: Specify which fields (e.g., hash, gas) to include in transactions.
 
 ## Error Handling
 All errors are handled using the DataStreamError enum, which covers network errors, invalid responses, deserialization issues, and configuration errors.

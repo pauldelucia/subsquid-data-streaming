@@ -1,8 +1,8 @@
 use crate::data_source::DataSource;
 use crate::errors::DataStreamError;
+use crate::fields::{LogFields, TransactionFields};
 use crate::filters::{LogFilter, TransactionFilter};
 use crate::models::data_item::{last_block_number, DataItem};
-use crate::options::{LogOptions, TransactionOptions};
 use crate::router_client::RouterClient;
 use crate::utils::parse_block_range;
 use crate::worker_client::WorkerClient;
@@ -34,8 +34,8 @@ pub struct DataStream {
     data_source: Option<DataSource>, // Specifies the data source (e.g., Subsquid API)
     log_filters: Vec<LogFilter>,     // Filters for logs to be streamed
     tx_filters: Vec<TransactionFilter>, // Filters for transactions to be streamed
-    log_options: Option<LogOptions>, // Options for log data (e.g., fields to select)
-    tx_options: Option<TransactionOptions>, // Options for transaction data (e.g., fields to select)
+    log_options: Option<LogFields>,  // Options for log data (e.g., fields to select)
+    tx_options: Option<TransactionFields>, // Options for transaction data (e.g., fields to select)
     router_client: Option<RouterClient>, // Router client for interacting with the data source API
     receiver: Option<Receiver<Result<Vec<DataItem>, DataStreamError>>>, // Receiver for streaming data batches
     current_block: u64,    // Current block number being processed
@@ -209,13 +209,13 @@ impl DataStream {
     }
 
     /// Sets the options for log data (e.g., fields to include in the results).
-    pub fn add_log_options(mut self, options: LogOptions) -> Self {
+    pub fn select_log_fields(mut self, options: LogFields) -> Self {
         self.log_options = Some(options);
         self
     }
 
     /// Sets the options for transaction data (e.g., fields to include in the results).
-    pub fn add_tx_options(mut self, options: TransactionOptions) -> Self {
+    pub fn select_tx_fields(mut self, options: TransactionFields) -> Self {
         self.tx_options = Some(options);
         self
     }

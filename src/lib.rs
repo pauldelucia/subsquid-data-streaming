@@ -25,7 +25,7 @@ pub mod filters;
 pub mod models;
 
 /// Options to define which fields (topics, data, etc.) should be returned.
-pub mod options;
+pub mod fields;
 
 /// Client responsible for interacting with the router to get worker URLs.
 pub mod router_client;
@@ -42,6 +42,6 @@ pub mod worker_query;
 pub use data_source::DataSource; // Represents the supported data sources (e.g., Subsquid).
 pub use data_stream::DataStream; // The main structure for building and managing the data stream.
 pub use errors::DataStreamError; // Errors that can be encountered during streaming.
+pub use fields::{LogFields, TransactionFields};
 pub use filters::{LogFilter, TransactionFilter}; // Log and transaction filters.
-pub use models::{LogEntry, TransactionEntry}; // Structures representing logs and transactions.
-pub use options::{LogOptions, TransactionOptions}; // Options for selecting fields in logs and transactions.
+pub use models::{LogEntry, TransactionEntry}; // Structures representing logs and transactions. // Options for selecting fields in logs and transactions.

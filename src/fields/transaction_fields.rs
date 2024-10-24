@@ -6,7 +6,7 @@ use serde::Serialize;
 /// The map's keys are the field names, and the values are booleans indicating whether the field should
 /// be included or excluded.
 #[derive(Clone, Debug, Default, Serialize)]
-pub struct TransactionOptions {
+pub struct TransactionFields {
     pub hash: bool,
     pub nonce: bool,
     pub transaction_index: bool,

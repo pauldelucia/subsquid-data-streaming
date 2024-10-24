@@ -6,7 +6,7 @@ use serde::Serialize;
 /// The map's keys are the field names, and the values are booleans indicating whether the field
 /// should be included or excluded.
 #[derive(Clone, Debug, Default, Serialize)]
-pub struct LogOptions {
+pub struct LogFields {
     pub topic0: bool,
     pub data: bool,
     pub transaction_index: bool,

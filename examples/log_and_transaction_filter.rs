@@ -1,7 +1,7 @@
 use env_logger::Env;
 use futures::StreamExt;
 use subsquid_data_streaming::{
-    DataSource, DataStream, LogFilter, LogOptions, TransactionFilter, TransactionOptions,
+    DataSource, DataStream, LogFields, LogFilter, TransactionFields, TransactionFilter,
 };
 use tokio::time::{sleep, Duration};
 
@@ -26,12 +26,12 @@ async fn main() {
         .set_data_source(DataSource::Subsquid(
             "https://v2.archive.subsquid.io/network/ethereum-mainnet".to_string(),
         ))
-        .add_log_options(LogOptions {
+        .select_log_fields(LogFields {
             topic0: true,
             data: true,
             ..Default::default()
         })
-        .add_tx_options(TransactionOptions {
+        .select_tx_fields(TransactionFields {
             hash: true,
             ..Default::default()
         })

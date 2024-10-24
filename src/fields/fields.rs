@@ -7,7 +7,7 @@ use std::collections::HashMap;
 /// in the response. The fields are represented as a map where the keys are field names and the
 /// values are booleans indicating whether the field should be included.
 #[derive(Clone, Debug, Serialize)]
-pub struct FieldsOptions {
+pub struct Fields {
     /// Optional map specifying which fields of logs to include.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub log: Option<HashMap<String, bool>>,

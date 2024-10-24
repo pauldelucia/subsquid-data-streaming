@@ -1,5 +1,5 @@
 use futures::StreamExt;
-use subsquid_data_streaming::{filters::LogFilter, options::LogOptions, DataSource, DataStream};
+use subsquid_data_streaming::{fields::LogFields, filters::LogFilter, DataSource, DataStream};
 
 #[tokio::test]
 async fn test_data_stream_integration() {
@@ -8,7 +8,7 @@ async fn test_data_stream_integration() {
         .set_data_source(DataSource::Subsquid(
             "https://v2.archive.subsquid.io/network/ethereum-mainnet".to_string(),
         ))
-        .add_log_options(LogOptions {
+        .select_log_fields(LogFields {
             topic0: true,
             data: true,
             ..Default::default()
