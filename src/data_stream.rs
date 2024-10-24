@@ -19,14 +19,14 @@ use tokio::sync::Semaphore;
 ///
 /// # Usage Example
 /// ```
-/// use subsquid_data_streaming::{DataStream, DataSource, LogFilter, LogOptions, TransactionOptions};
+/// use subsquid_data_streaming::{DataStream, DataSource, LogFilter, LogFields, TransactionFields};
 ///
 /// let data_stream = DataStream::new()
 ///     .set_data_source(DataSource::Subsquid("https://v2.archive.subsquid.io/network/ethereum-mainnet".to_string()))
 ///     .from_block(6_000_000)
-///     .add_log(LogFilter::new().with_address("0xabcd").with_topic("Burn(address,int24,int24,uint128,uint256)"))
-///     .select_log_options(LogOptions::default())
-///     .select_tx_options(TransactionOptions::default());
+///     .add_log_filter(LogFilter::new().with_address("0xabcd").with_topic("Burn(address,int24,int24,uint128,uint256)"))
+///     .select_log_fields(LogFields::default())
+///     .select_tx_fields(TransactionFields::default());
 ///
 /// // Stream and process the data
 /// ```
